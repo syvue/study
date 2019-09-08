@@ -264,7 +264,8 @@ Git有两种操作界面，**命令行模式**和图形界面模式，我们主�
 
 * 首先我们登陆GitHub官网按照提示一步一步申请免费的账号，并且初始化仓库。
 * 然后打开Git Bash 在命令行模式下通过cd 命令进入对应目录，在下图我进入的桌面(Desktop)目录
-    ![Git Bash](tool_files/git1.png)
+
+![Git Bash](tool_files/git1.png)
 
 * 我们首先设置对应GitHub账号用户名和邮件
 
@@ -279,6 +280,163 @@ Git有两种操作界面，**命令行模式**和图形界面模式，我们主�
 
 > git clone  https://github.com/**你自己的仓库地址**
 
-* 进入克隆目录，然后当完成对文件的编辑保存好之后，我们先将修改后的文件添加到缓存区，然后再提交（在这个过程，系统会要求我们输入远程GitHub的账号和密码，按提示输入即可，由于还原系统的问题，我们就不使用SSH方式登录，但是在后面我们会在单独介绍SSH免密登录）。
+* 进入克隆目录，然后当完成对文件的编辑保存好之后，我们先将修改后的文件添加到缓存区。
+
+![Git Bash](tool_files/git4.png)
+
+> git add .
+> git commit -m "代码提交的信息" 
+
+* 将提交的结果推送代码到远程GitHub仓库(（在这个过程，系统会要求我们输入远程GitHub的账号和密码，按提示输入即可，由于还原系统的问题，我们就不使用SSH方式登录，但是在后面我们会在单独介绍SSH免密登录）。)
+
+![Git push](tool_files/git5.png)
+
+>  git push origin master
+
+### **Vue.js**
+
+![Vue](tool_files/logo.png)
+**[Vue.js官方网站](https://cn.vuejs.org/)**
+
+### vue简介
+
+> **Vue.js**是现今三大流行前端框架之一(Angular.js,React.js,Vue.js),是一个只要拥有的html,css,javascript基础，就能很快学会的易用灵活的用于构建用户界面的渐进式前端框架。
+
+#### Vue.js新手入门
+
+* 使用Vue.js非常简单，在HTML页面中使用**script**标签导入**Vue.js**文件就可以了。
+如下例：
+
+``` javascript
+
+    <!-- 可以通过CDN直接使用网上的资源 -->
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <!-- 也可以使用本地资源 -->
+
+    <script src="vue.js"></script>
+```
+
+* 接下来我们就可以来写一个Hello Vue.js!
+
+```html
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Hello!Vue.js</title>
+        <!-- 导入Vue.js -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            {{ message }}
+        </div>
 
 
+        <script>
+            var app = new Vue({
+                el: 'app',
+                data: {
+                    message: 'Hello Vue.js!!!!'
+                }
+            })
+        
+        </script>
+
+        </body>
+    </html>
+```
+* Vue.js的Demo
+    * vue-demo.html HTML主体文件， vue.js Vue框架文件 ，main.js Vue实例文件  
+``` javascript
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Vue入门</title>
+        
+    </head>
+    <body>
+        
+            <div id="app">
+                <input type="text" v-model='name'> <span v-show='name'>你的名字：{{name}}</span><br>
+                <input type="text" v-model='age'> <span v-show='age'>你的年龄：{{age}}</span><br>
+                <input type="text" v-model='sex'> <span v-show='sex'>你的性别：{{sex}}</span><br>
+                <ul>
+                    <li v-for='food in foodList'>{{ food }}</li>
+                </ul>
+            
+            </div>
+
+            <!-- 导入Vue框架 -->
+            <script src="vue.js"></script>
+            <script src="main.js"></script>
+    </body>
+    </html>
+
+```
+*   vue-demo.html
+
+``` javascript
+        //vue实例
+    var app = new Vue({
+        el: '#app',
+        data: {
+        name: null,
+        age:null ,
+        sex:null,
+        foodList:['葱','姜','蒜']
+        }
+    });
+```
+* main.js
+
+##### Vue.js 的语法特点
+> 双括号{{}}语法，Vue.js通过{{ }}来实现数据的渲染。
+> 指令 (Directives) 是带有 v- 前缀的由Vue.js定义的特殊属性。例如：v-for,v-bind,v-show等等这些指令，除了Vue.js自带的属性，我们还可以自定义Vue指令。
+> el是Element的缩写，el属性对应的是Vue框架挂载在HTML中对应的视图
+> data是Vue实例的数据属性
+
+#### v-for指令
+
+> 通过v-for指令来实现循环数组遍历，使用特定语法 v-for='alias in expression'，为当前遍历的元素提供别名,通常使用在ul或者ol标签中li选项中。
+
+``` html
+
+    <div id="app">
+           <ul>
+                <!-- <li v-for="food in foodList">{{ food }} </li> -->
+                <li v-for='food in foodList'>
+                        {{food.name}} ￥：{{food.discount ? food.price*food.discount : food.price}} 折扣率{{food.discount}}
+                </li>
+            </ul>
+
+    </div>
+
+    <script src="vue.js"></script>
+    <script src="v-for.js"></script>
+
+```
+* vue-01.html
+
+``` javascript
+    var app = new Vue({
+    el:'#app',
+    data:{
+        // foodList:['可乐','薯条','炸鸡']
+        foodList:[
+            {name:'可乐',price:3,discount:0.9},
+            {name:'薯条',price:5,discount:0.8},
+            {name:'炸鸡',price:10,discount:0},
+        ]
+    }
+    })
+```
+* v-for.js
